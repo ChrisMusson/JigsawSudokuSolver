@@ -1,0 +1,17 @@
+1...6..
+.2...7.
+..3....
+.......
+....4..
+.1...5.
+..2...6
+
+AABBBCC
+ABBBDDC
+AAADDCC
+EFFGDDC
+EEFFHHH
+EFFIIIH
+EEIIIHH
+
+deficit: true

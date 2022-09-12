@@ -1,3 +1,4 @@
+from ast import parse
 import re
 
 
@@ -19,11 +20,24 @@ class InputParser:
         pattern = re.compile("^[a-z]{4,}$")
         return list(filter(pattern.match, input))
 
+    def is_deficit(self, input: list[str]) -> bool:
+        pattern = re.compile("^deficit:?.*true$")
+        valid = list(filter(pattern.match, input))
+        return len(valid) > 0
+
+    def is_surplus(self, input: list[str]) -> bool:
+        pattern = re.compile("^surplus:?.*true$")
+        valid = list(filter(pattern.match, input))
+        return len(valid) > 0
+
     def parse(self) -> dict[str, list[str] | bool]:
         parsed_puzzle = {}
         input = self.read_file()
 
         parsed_puzzle["givens"] = self.parse_givens(input)
         parsed_puzzle["regions"] = self.parse_regions(input)
+
+        parsed_puzzle["deficit"] = self.is_deficit(input)
+        parsed_puzzle["surplus"] = self.is_surplus(input)
 
         return parsed_puzzle

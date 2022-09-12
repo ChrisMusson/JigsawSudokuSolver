@@ -56,8 +56,18 @@ class SudokuModel(Model):
 
         for cells in region_cells:
             for k in range(self.size):
-                self += xsum(self.sol[cell[0] - 1][cell[1] - 1][k]
-                             for cell in cells) == 1
+                if self.input["deficit"]:
+                    self += xsum(self.sol[cell[0] - 1][cell[1] - 1][k]
+                                 for cell in cells) <= 1
+                elif self.input["surplus"]:
+                    # some puzzles have a central cell that isn't part of the surplus constraint,
+                    # so only add this constraint to those regions that are larger than size
+                    if len(cells) > self.size:
+                        self += xsum(self.sol[cell[0] - 1][cell[1] - 1][k]
+                                     for cell in cells) >= 1
+                else:
+                    self += xsum(self.sol[cell[0] - 1][cell[1] - 1][k]
+                                 for cell in cells) == 1
 
     def add_constraints(self):
         self.add_standard_constraints()

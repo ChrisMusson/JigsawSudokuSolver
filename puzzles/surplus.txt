@@ -1,0 +1,17 @@
+....4.1
+.4.7...
+......2
+.3...1.
+1...2..
+...6..7
+6.3..5.
+
+AAAABBB
+ACCCBBB
+ACCCBBD
+ACCEFFD
+AGGFFFD
+GGGFFFD
+GGGDDDD
+
+surplus: true
